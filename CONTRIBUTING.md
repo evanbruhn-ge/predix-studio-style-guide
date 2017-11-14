@@ -5,7 +5,7 @@
 
 Targeting **Predix Studio** and **Predix App Engine** development. This references a subset of AirBnB's ES5 and ES6 style guides, tailored to suit Studio and App Engine's front-end stack and development patterns. SCSS style guide references a subset of AirBnB's and codeguide.co's SCSS and CSS style guides in addition to our guidelines.
 
-##Table of Contents
+## Table of Contents
 1. [JavaScript Style Guide](#javascript-style-guide)
 	1. [Introduction](#javascript-intro)
 		1. [Linting](#javascript-linting)

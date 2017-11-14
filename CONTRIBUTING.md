@@ -372,7 +372,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 
   * Always use `class`. Avoid manipulating `prototype` directly.
 
-  > Why? `class` syntax is more concise and easier to reason about.
+    > Why? `class` syntax is more concise and easier to reason about.
 
     ```javascript
     // bad

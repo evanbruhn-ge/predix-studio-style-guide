@@ -14,10 +14,11 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 	2. [Glossary](#javascript-glossary)
 	3. [Whitespace](#javascript-whitespace)
 	4. [Naming Conventions](#javascript-naming)
-	5. [Quotes](#javascript-quotes)
-	6. [Comments](#javascript-comments)
-	7. [jQuery](#javascript-jquery)
-	8.	[Classes & Constructors](#javascript-classes) (ES6 extensions only)
+	5. [Variables and References](#javascript-references)
+	6. [Quotes](#javascript-quotes)
+	7. [Comments](#javascript-comments)
+	8. [jQuery](#javascript-jquery)
+	9. [Classes & Constructors](#javascript-classes) (ES6 extensions only)
 2. [SCSS Style Guide](#scss-style-guide)
 	1. [Linting](#scss-linting)
 	2. [Glossary](#scss-glossary)
@@ -174,8 +175,38 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
       name: 'yup',
     });
     ```
-    
-* **<a name="javascript-quotes"></a>1.5 Quotes**
+
+* **<a name="javascript-variables"></a>1.5 Variables and References**
+
+  * Always use `const` or `let` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. eslint: [`no-undef`](https://eslint.org/docs/rules/no-undef) [`prefer-const`](https://eslint.org/docs/rules/prefer-const)
+
+    ```javascript
+    // bad
+    superPower = new SuperPower();
+
+    // good
+    const superPower = new SuperPower();
+    ```
+
+  * If you must reassign references, use `let` instead of `var`. eslint: [`no-var`](https://eslint.org/docs/rules/no-var.html) jscs: [`disallowVar`](http://jscs.info/rule/disallowVar)
+
+    > Why? `let` is block-scoped rather than function-scoped like `var`.
+
+    ```javascript
+    // bad
+    var count = 1;
+    if (true) {
+      count += 1;
+    }
+
+    // good, use the let.
+    let count = 1;
+    if (true) {
+      count += 1;
+    }
+    ```
+
+* **<a name="javascript-quotes"></a>1.6 Quotes**
 
   * Use single quotes `''` for strings. eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
 
@@ -187,7 +218,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     const name = 'This is an awesome string of many characters';
     ```
     
-* **<a name="javascript-comments"></a>1.6 Comments**
+* **<a name="javascript-comments"></a>1.7 Comments**
 
   * Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
 
@@ -292,7 +323,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     } 
     ```    
    
-* **<a name="javascript-jquery"></a>1.7 jQuery**
+* **<a name="javascript-jquery"></a>1.8 jQuery**
 
   ##### NOTE: No jQuery guidelines have linting support. Enforcement of these guidelines is manual only.
 	
@@ -364,7 +395,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     });
     ```
   
-* **<a name="javascript-classes"></a>1.8 Classes and Constructors**
+* **<a name="javascript-classes"></a>1.9 Classes and Constructors**
 
   ##### This applies to Studio and App Engine extensions written as ES6 classes only! Linting configuration is automatically scoped to prevent these rules from applying to legacy extensions.
 

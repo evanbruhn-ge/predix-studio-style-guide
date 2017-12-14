@@ -14,7 +14,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 	2. [Glossary](#javascript-glossary)
 	3. [Whitespace](#javascript-whitespace)
 	4. [Naming Conventions](#javascript-naming)
-	5. [Variables and References](#javascript-references)
+	5. [Variables and References](#javascript-variables)
 	6. [Quotes](#javascript-quotes)
 	7. [Comments](#javascript-comments)
 	8. [jQuery](#javascript-jquery)

@@ -17,8 +17,9 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 	5. [Variables and References](#javascript-variables)
 	6. [Quotes](#javascript-quotes)
 	7. [Comments](#javascript-comments)
-	8. [jQuery](#javascript-jquery)
-	9. [Classes & Constructors](#javascript-classes) (ES6 extensions only)
+	8. [Comparison Operators & Equality](#javascript-operators)
+	9. [jQuery](#javascript-jquery)
+	10. [Classes & Constructors](#javascript-classes) (ES6 extensions only)
 2. [SCSS Style Guide](#scss-style-guide)
 	1. [Linting](#scss-linting)
 	2. [Glossary](#scss-glossary)
@@ -323,7 +324,69 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     } 
     ```    
    
-* **<a name="javascript-jquery"></a>1.8 jQuery**
+* **<a name="javascript-comments"></a>1.8 Comparison Operators & Equality**
+
+  * Use `===` and `!==` over `==` and `!=`. eslint: [`eqeqeq`](https://eslint.org/docs/rules/eqeqeq.html)
+
+    ```javascript
+    // bad
+    if (a == 1) doThing()
+    if (b == '1') doThing()
+
+    // good
+    if (a === 1) doThing();
+    if (b === '1') doThing();`
+
+  * Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+
+    - **Objects** evaluate to **true**
+    - **Undefined** evaluates to **false**
+    - **Null** evaluates to **false**
+    - **Booleans** evaluate to **the value of the boolean**
+    - **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
+    - **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
+
+    ```javascript
+    if ([0] && []) {
+      // true
+      // an array (even an empty one) is an object, objects will evaluate to true
+    }
+    ```
+  * Use shortcuts for booleans, but explicit comparisons for strings and numbers.
+
+    ```javascript
+    // bad
+    if (isValid === true) {
+      // ...
+    }
+
+    // good
+    if (isValid) {
+      // ...
+    }
+
+    // bad
+    if (name) {
+      // ...
+    }
+
+    // good
+    if (name !== '') {
+      // ...
+    }
+
+    // bad
+    if (collection.length) {
+      // ...
+    }
+
+    // good
+    if (collection.length > 0) {
+      // ...
+    }
+    ```
+   
+* **<a name="javascript-jquery"></a>1.9 jQuery**
 
   ##### NOTE: No jQuery guidelines have linting support. Enforcement of these guidelines is manual only.
 	
@@ -395,7 +458,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     });
     ```
   
-* **<a name="javascript-classes"></a>1.9 Classes and Constructors**
+* **<a name="javascript-classes"></a>1.10 Classes and Constructors**
 
   ##### This applies to Studio and App Engine extensions written as ES6 classes only! Linting configuration is automatically scoped to prevent these rules from applying to legacy extensions.
 

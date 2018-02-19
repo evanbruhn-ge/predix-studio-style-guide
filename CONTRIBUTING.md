@@ -324,7 +324,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     } 
     ```    
    
-* **<a name="javascript-comments"></a>1.8 Comparison Operators & Equality**
+* **<a name="javascript-operators"></a>1.8 Comparison Operators & Equality**
 
   * Use `===` and `!==` over `==` and `!=`. eslint: [`eqeqeq`](https://eslint.org/docs/rules/eqeqeq.html)
 

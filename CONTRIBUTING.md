@@ -331,13 +331,15 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     ```javascript
     // bad
     const a = 1
-    a == '1' (returns true)
     a == 1 (returns true)
+    a == '1' (returns true)
+    a == true (returns true)
 
     // good
     const b = 1
+    b === 1 (returns true)
     b === '1' (returns false)
-    b === '1' (returns true)
+    b === true (returns false)
     ```
 
   * Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:

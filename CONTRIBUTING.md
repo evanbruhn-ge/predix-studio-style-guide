@@ -336,8 +336,9 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 
     // good
     const b = 1
-    a === '1' (returns false)
-    b === '1' (returns true)`
+    b === '1' (returns false)
+    b === '1' (returns true)
+    ```
 
   * Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
 

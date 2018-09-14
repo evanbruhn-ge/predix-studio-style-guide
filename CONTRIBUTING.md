@@ -54,10 +54,6 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 
   Developers are encouraged to call out style guide issues in other PRs as part of code review. 
 
-* **<a name="javascript-patterns"></a>1.1.3 A note on module/class patterns**
-
-  Predix Studio's front-end codebase is currently undergoing refactoring work to reimplement the MD IIFE-style modules as ES6 classes. For the short term, this means we have two sets of guidelines for each style. Note that all future module development *must* align with the ES6 class guidelines (1.8).
-
 * **<a name="javascript-glossary"></a>1.2 Glossary**
 
   Term/Symbol | Definition
@@ -464,10 +460,6 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     ```
   
 * **<a name="javascript-classes"></a>1.10 Classes and Constructors**
-
-  ##### This applies to Studio and App Engine extensions written as ES6 classes only! Linting configuration is automatically scoped to prevent these rules from applying to legacy extensions.
-
-  ##### Follow these guidelines for all new extensions to Studio and App Engine.  
 
   * Always use `class`. Avoid manipulating `prototype` directly.
 

@@ -59,8 +59,6 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
   Term/Symbol | Definition
   ------------- | -------------
   ...  | Represents written code
-  IIFE module  | **I**mmediately-**i**nvoked **f**unction **e**xpression, references a now deprecated style of module development used in Predix Studio and App Engine. eg. <code>MD.ui.Component({ name : 'indicators', rebuild: true, func : function() { ... }}, function() { });</code>
-  ES6 classes | [Read this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes). Now a standard pattern for extending Studio and App Engine.
 
 * **<a name="javascript-whitespace"></a>1.3 Whitespace**
 

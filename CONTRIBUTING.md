@@ -221,27 +221,27 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 
   * Avoid function declaration and use function expression.
 
-  ```javascript
+    ```javascript
     // bad
     function foo() { ... }
-    
+
     // good
     const foo = () => ...
-    
+
     // generators
     // bad
     function* foo() { ... }
-    
+
     // good
     const foo = function* () { ... }
-    
+
     // async functions
     // bad
     async function foo () { ... }
-    
+
     // good
     const foo = async () => { ... }
-  ```
+    ```
 
   * Function declarations should be used for module-level functions, arrow functions should be used everywhere else.
 
@@ -299,14 +299,20 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     Impure functions or impure function groups must be commented with @sideeffect ( ideally needs to be made pure eventually) or @intendedsideeffects if it is impure by design. Pure functions can be marked  @nosideeffects for clarity.
 
     ```javascript
-        // @nosideeffects
+        /**
+	* @nosideeffects
+	*/
         const upper = a => s.toUpperCase()
         const selectBody = res => res.body
         
-        // @intendedsideeffects
+        /**
+	* @intendedsideeffects
+	*/
         const requestBodyToUpperCase = compose(upper, selectBody, getHttp)
 
-        // @sideeffect
+        /**
+	* @sideeffect
+	*/
         const requestBodyToUpperCase = compose(upper, selectBody, getHttp)
     ```
 

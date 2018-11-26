@@ -16,7 +16,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 	5. [Re-usability](#javascript-reuse") 
 	6. [Whitespace](#javascript-whitespace)
 	7. [Naming Conventions](#javascript-naming)
-	8. [Functions](#javascript-functions0
+	8. [Functions](#javascript-functions)
 	9. [Composable Functions](#javascript-composable-functionss)
 	10. [state](#javascript-state)
 	11. [Variables and References](#javascript-variables)

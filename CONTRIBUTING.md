@@ -5,26 +5,6 @@
 
 Targeting **Predix Studio** and **Predix App Engine** development. This references a subset of AirBnB's ES5 and ES6 style guides, tailored to suit Studio and App Engine's front-end stack and development patterns. SCSS style guide references a subset of AirBnB's and codeguide.co's SCSS and CSS style guides in addition to our guidelines.
 
-//
-javascript-naming"></a>1.7 Naming Conventions
-javascript-functions"></a>1.8 Functions
-javascript-composable-functionss"></a>1.9 Composable Functions**
-javascript-state"></a>1.10 State**
-javascript-variables"></a>1.11 Variables and References
-
-javascript-constants"></a>1.12 Constants**
-javascript-config"></a>1.13 Configurations**
-javascript-new"></a>1.14 New
-
-javascript-quotes"></a>1.15 Quotes
-javascript-comments"></a>1.16 Comments
-javascript-operators"></a>1.17 Comparison Operators & Equality
-javascript-jquery"></a>1.18 jQuery
-javascript-classes"></a>1.19 Classes and Constructors
-javascript-loops"></a>1.20 Loops
-javascript-partial-evaluation"></a>1.21 Partial Evaluation**
-//
-
 ## Table of Contents
 1. [JavaScript Style Guide](#javascript-style-guide)
 	1. [Introduction](#javascript-intro)

@@ -5,21 +5,51 @@
 
 Targeting **Predix Studio** and **Predix App Engine** development. This references a subset of AirBnB's ES5 and ES6 style guides, tailored to suit Studio and App Engine's front-end stack and development patterns. SCSS style guide references a subset of AirBnB's and codeguide.co's SCSS and CSS style guides in addition to our guidelines.
 
+//
+javascript-naming"></a>1.7 Naming Conventions
+javascript-functions"></a>1.8 Functions
+javascript-composable-functionss"></a>1.9 Composable Functions**
+javascript-state"></a>1.10 State**
+javascript-variables"></a>1.11 Variables and References
+
+javascript-constants"></a>1.12 Constants**
+javascript-config"></a>1.13 Configurations**
+javascript-new"></a>1.14 New
+
+javascript-quotes"></a>1.15 Quotes
+javascript-comments"></a>1.16 Comments
+javascript-operators"></a>1.17 Comparison Operators & Equality
+javascript-jquery"></a>1.18 jQuery
+javascript-classes"></a>1.19 Classes and Constructors
+javascript-loops"></a>1.20 Loops
+javascript-partial-evaluation"></a>1.21 Partial Evaluation**
+//
+
 ## Table of Contents
 1. [JavaScript Style Guide](#javascript-style-guide)
 	1. [Introduction](#javascript-intro)
 		1. [Linting](#javascript-linting)
 		2. [Enforcement](#javascript-enforcement)
-		3. [A note on module/class patterns](#javascript-patterns)
 	2. [Glossary](#javascript-glossary)
-	3. [Whitespace](#javascript-whitespace)
-	4. [Naming Conventions](#javascript-naming)
-	5. [Variables and References](#javascript-variables)
-	6. [Quotes](#javascript-quotes)
-	7. [Comments](#javascript-comments)
-	8. [Comparison Operators & Equality](#javascript-operators)
-	9. [jQuery](#javascript-jquery)
-	10. [Classes & Constructors](#javascript-classes) (ES6 extensions only)
+	3. [Functional Values](#javascript-functional-values)
+	4. [Architecture](#javascript-architecture")
+	5. [Re-usability](#javascript-reuse") 
+	6. [Whitespace](#javascript-whitespace)
+	7. [Naming Conventions](#javascript-naming)
+	8. [Functions](#javascript-functions0
+	9. [Composable Functions](#javascript-composable-functionss)
+	10. [state](#javascript-state)
+	11. [Variables and References](#javascript-variables)
+	12. [Constants](#javascript-constants)
+	13. [Configurations](#javascript-config)
+	14. [New](#javascript-new)
+	15. [Quotes](#javascript-quotes)
+	16. [Comments](#javascript-comments)
+	17. [Comparison Operators & Equality](#javascript-operators)
+	18. [jQuery](#javascript-jquery)
+	19. [Classes & Constructors](#javascript-classes) (ES6 extensions only)
+	20. [Loops](#javascript-loops)
+	21. [Partial Evaluation](#javascript-partial-evaluation)
 2. [SCSS Style Guide](#scss-style-guide)
 	1. [Linting](#scss-linting)
 	2. [Glossary](#scss-glossary)
@@ -60,7 +90,43 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
   ------------- | -------------
   ...  | Represents written code
 
-* **<a name="javascript-whitespace"></a>1.3 Whitespace**
+* **<a name="javascript-functional-values"></a>1.3 Functional Values**
+
+* These are the values we uphold with this guide and hope that this will help at releasing better software more regularly and steadily. There are a number of benefits with functional programming, namely more robust, clearer code that is easier to test, and review and maintain. You no longer have to imagine what consequences of mutating this field for that components will be. You just don’t have to think broader than the ten lines of code you’re looking at right now.
+
+   On the downside many articles about functional programming are written by nerdy mathematician point scoring types. Reading them without preliminary training is dangerous: categories and morphisms can blow your mind in exchange for nothing.
+
+   “Writing pure functions is easy, but combining them into a complete application is where things get hard”
+
+   Our aim here is too adopt some of the more sane elements of the functional approach that will deliver the majority of the benefits without getting lost in the esoteric maths of category theory. The focus is not about lambda calculus, monads, morphisms, and combinators. It’s about having many small well-defined composable functions without mutations of global state, their arguments, and IO.”
+
+   “In other words, if point-free style helps to communicate better in a particular case, use it. Otherwise, don’t.”
+
+   Switching to small composable functions without side effects where possible will give us most of the benefits of functional programming without the headache inducing extremes of the discipline.
+
+   This guide is written with the
+
+   * Functional is the best way
+   * Impurity must be isolated, mark it as impure, either by design or pragmatism.
+   * Composable code is encouraged
+
+* **<a name="javascript-architecture"></a>1.4 Architecture**
+
+   * A well architectured' javascript program is done through the module architectural pattern. Which decouple modules (components) and expose composable interfaces. Therefore it is paramount to properly apply the module pattern.
+
+    So what is a module? It is a self-contained program, that takes an input and return an output. This program can be pure or impure. But a pure program cannot receive an impure input. So expect inputs to be data. This program can have any number of private functions to achieve its goal. But as a general idea, it should have only one interface -- one export.
+
+    A module can require or import as many modules it needs to achieve its goal. But you should try to keep the module small and centered around one responsibility.
+
+    A module should be in its own file, and all of its sub-modules in the same directory. In this manner, a composed module can be replaced or deleted from the javascript program without any major side effects.
+
+    One could say that a complex javascript program is a collection of modules that could be replaced with a module with the same public interface.
+
+* **<a name="javascript-reuse"></a>1.5 Re-usability**
+
+  * Opposite to what some people may think, the idea of reusability is not so much a goal but a side effect in functional programming. It's something you attain because you design the components properly, not because you avoid copying every piece of code. We prefer to see code that will never change because it has only one responsibility, be copied over as a private function into another module rather than the same code as part of a utility or its own module. Moreover, think like this, copy the code first, use unit tests to document the functionality, globalization of the code is the last resort thing.
+
+* **<a name="javascript-whitespace"></a>1.6 Whitespace**
 
   * Use soft tabs set to 2 spaces. eslint: [`indent`](http://eslint.org/docs/rules/indent.html) jscs: [`validateIndentation`](http://jscs.info/rule/validateIndentation)
 
@@ -132,8 +198,9 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     const foo = [1, 2, 3];
     ```
 
-* **<a name="javascript-naming"></a>1.4 Naming Conventions**
+* **<a name="javascript-naming"></a>1.7 Naming Conventions**
 
+  * Avoid overuse of the helper naming. A function has only one purpose and its name should represent that. Moreover, it should be private to its module. Although it may cause code duplication, it will decrease complexity by decoupling modules.
   * Use camelCase when naming objects, functions, and instances. eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase.html) jscs: [`requireCamelCaseOrUpperCaseIdentifiers`](http://jscs.info/rule/requireCamelCaseOrUpperCaseIdentifiers)
 
     ```javascript
@@ -170,8 +237,152 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
       name: 'yup',
     });
     ```
+* **<a name="javascript-functions"></a>1.8 Functions**
 
-* **<a name="javascript-variables"></a>1.5 Variables and References**
+  * Avoid function declaration and use function expression.
+
+  ```javascript
+    // bad
+    function foo() { ... }
+    
+    // good
+    const foo = () => ...
+    
+    // generators
+    // bad
+    function* foo() { ... }
+    
+    // good
+    const foo = function* () { ... }
+    
+    // async functions
+    // bad
+    async function foo () { ... }
+    
+    // good
+    const foo = async () => { ... }
+  ```
+
+  * Function declarations should be used for module-level functions, arrow functions should be used everywhere else.
+
+    ```javascript
+
+    // Document level
+    const foo = function() { ... }
+    
+        // Within a block
+        const foo = () => ...
+        function getBigSalad(){
+        return salads.filter(salad => salad.size === 'big')[0]
+    }
+    ```
+
+   * One Input, One Output encouraged
+
+    ```javascript
+    // bad
+    const add = (a, b) => a + b
+    
+    const foo = (a, b, c, d, e) => (/* ... */)
+    const foo = a => b => c => d => e => (/* ... */)
+    
+    // ok
+    const add = ({a, b}) => a + b
+    
+    // best
+    const add = a => b => a + b
+
+    which can be called as follows:
+    add(1)(2); // 3
+    ```
+
+    * Single Returns encouraged
+
+    ```javascript
+        // bad
+        const foo = a => {
+        if (!a){
+            return bar(0)
+        }
+        return bar(a)
+        }
+        
+        // ok
+        const foo = a => bar(a ? a : 0)
+        
+        // best
+        const foo (a = 0) =>  bar(a)
+    ```
+
+    * Document Impurity
+
+    Impure functions or impure function groups must be commented with @sideeffect ( ideally needs to be made pure eventually) or @intendedsideeffects if it is impure by design. Pure functions can be marked  @nosideeffects for clarity.
+
+    ```javascript
+        // @nosideeffects
+        const upper = a => s.toUpperCase()
+        const selectBody = res => res.body
+        
+        // @intendedsideeffects
+        const requestBodyToUpperCase = compose(upper, selectBody, getHttp)
+
+        // @sideeffect
+        const requestBodyToUpperCase = compose(upper, selectBody, getHttp)
+    ```
+
+* **<a name="javascript-composable-functionss"></a>1.9 Composable Functions**
+
+  * Split code into composable functions.
+  
+    ```javascript
+    // bad
+    const splitToKeyValuePair = headerString => {
+    return headerString.split(',')
+        .reduce((result, current) => {
+        const keyValuePair = current.split('=')
+        const key = keyValuePair[0]
+        const value = keyValuePair[1]
+        result[key] = value
+        return result
+        }, {})
+    }
+    
+    // good
+    const splitToKeyValuePair = compose(combine, fromPairs, map(split('=')), map(trim), split(','))
+    ```
+
+* **<a name="javascript-state"></a>1.10 State**
+
+  * Assignments & State Modification.
+    As a general rule you should avoid assignments, they alter state and increase the risk of sharing state in code and changing functions parameters.
+
+    ```javascript
+    // bad
+    const foo = state => {
+    state.count = state.count + 1
+    return state
+    }
+    
+    // good
+    const foo = state => object.assign({}, state, { count: state.count + 1 })
+    
+    // best
+    const foo = state => ({ ...state, count: state.count + 1 })
+    ```
+
+  * Do not share state
+
+    ```javascript
+    // bad
+    const inc = () => state.count++
+    
+    // good
+    const inc = (state = { count: 0 }) => ({ count : state.count + 1 })
+    ```  
+
+* **<a name="javascript-variables"></a>1.11 Variables and References**
+
+  * var is verboten
 
   * Always use `const` or `let` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. eslint: [`no-undef`](https://eslint.org/docs/rules/no-undef) [`prefer-const`](https://eslint.org/docs/rules/prefer-const)
 
@@ -201,7 +412,66 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     }
     ```
 
-* **<a name="javascript-quotes"></a>1.6 Quotes**
+  * Keep variables closer to usage, inside function block if possible and just prefer using string literals.
+
+    ```javascript
+    // bad
+    const INC = 2
+    ...
+    const increment = a => a + INC
+    
+    // OK
+    const increment = a => {
+    const INC = 2
+    return a + INC
+    }
+    
+    // good
+    const incrementBy2 = a =>  a + 2
+    ```
+
+* **<a name="javascript-constants"></a>1.12 Constants**
+
+  * Use string, boolean or number literals. But if you use constants, they must be close to usage, part of the module that uses them.
+
+      ```javascript
+    // good
+    const userCountReducer = (userCount = 5) => ...
+    
+    // good
+    const USER_DEFAULT_COUNT = 5
+    const userCountReducer = (state = USER_DEFAULT_COUNT) => ...
+    
+    // good
+    const USER_DEFAULT_COUNT = 5
+    const fromDefaults = ()=>  ({ userCount: USER_DEFAULT_COUNT })
+    
+    // good
+    const fromDefaults = () => ({ userCount: 5 })
+    ```
+
+* **<a name="javascript-config"></a>1.13 Configurations**
+  * Constants are often used to implement configuration - parameters to the program as a whole that need to be changeable independently of code. In these cases, globality is more reasonable; however you should still try to think of ways to make configuration specific to the module you're working on.
+
+  ```javascript
+    // good
+    const { USER_DEFAULT_COUNT } = require('./configuration')
+    ... // a few lines doen but not too far
+    const userCountReducer = (state = USER_DEFAULT_COUNT) => ...
+    // bad
+    const USER_DEFAULT_COUNT = 5
+    ...
+    const reducer = (state = USER_DEFAULT_COUNT) => ... // you just can't know that the default is 5, it makes no sense
+    
+    // good
+    const reducer = (state = 5) => ...
+  ```
+
+* **<a name="javascript-new"></a>1.14 New**
+
+  * Use with caution to avoid side effects
+
+* **<a name="javascript-quotes"></a>1.15 Quotes**
 
   * Use single quotes `''` for strings. eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
 
@@ -213,7 +483,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     const name = 'This is an awesome string of many characters';
     ```
     
-* **<a name="javascript-comments"></a>1.7 Comments**
+* **<a name="javascript-comments"></a>1.16 Comments**
 
   * Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
 
@@ -318,7 +588,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     } 
     ```    
    
-* **<a name="javascript-operators"></a>1.8 Comparison Operators & Equality**
+* **<a name="javascript-operators"></a>1.17 Comparison Operators & Equality**
 
   * Use `===` and `!==` over `==` and `!=`. eslint: [`eqeqeq`](https://eslint.org/docs/rules/eqeqeq.html)
 
@@ -385,83 +655,12 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     }
     ```
    
-* **<a name="javascript-jquery"></a>1.9 jQuery**
+* **<a name="javascript-jquery"></a>1.18 jQuery**
 
-  ##### NOTE: No jQuery guidelines have linting support. Enforcement of these guidelines is manual only.
-	
-  * Prefix jQuery object variables with a `$`.
-
-    ```javascript
-    // bad
-    var sidebar = $('.sidebar');
-
-    // good
-    var $sidebar = $('.sidebar');
-    ```
-
-  * Cache jQuery lookups.
-
-    ```javascript
-    // bad
-    function setSidebar() {
-      $('.sidebar').hide();
-
-      // ...stuff...
-
-      $('.sidebar').css({
-        'background-color': 'pink'
-      });
-    }
-
-    // good
-    function setSidebar() {
-      var $sidebar = $('.sidebar');
-      $sidebar.hide();
-
-      // ...stuff...
-
-      $sidebar.css({
-        'background-color': 'pink'
-      });
-    }
-    ```
-    
-  * Utilise the new $.fn.on and $.fn.off method of attaching and detaching event handlers rather than the older deprecated methods ($.fn.bind, $.fn.unbind, $.fn.delegate, $.fn.undelegate) 
- 
-    ```javascript
-    // bad
-    $el.bind('click', function () { ... });
-    $el.unbind('click');
-
-    // good
-    $el.on('click', function () { ... });
-    $el.off('click');
-    ```
-
-  * Do not use the 'ready' event in Jquery - it is not always clear on when it will fire. Utilize the new thenable object $.ready - it will fire consistently in both AJAX and DOM Loaded events.
-
-    ```javascript
-    // bad
-    $(...).on('ready', function () {
-      ...
-    });
-
-    // good
-    $.when($.ready).then( function () {
-      ...
-    });
-
-    // also good
-    $( function () {
-      ... 
-    });
-    ```
+  * jQuery is not available for use in the v11 API and must not be added without discussion with the UX team.
+  * jQuery is still available for use in the v10 API, refer to (some link to an old revision of the guide) for guidelines on its use"
   
-* **<a name="javascript-classes"></a>1.10 Classes and Constructors**
-
-  * Always use `class`. Avoid manipulating `prototype` directly.
-
-    > Why? `class` syntax is more concise and easier to reason about.
+* **<a name="javascript-classes"></a>1.19 Classes and Constructors**
 
     ```javascript
     // bad
@@ -595,7 +794,40 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
       bar() { return 2; }
     }
     ```
+
+* **<a name="javascript-loops"></a>1.20 Loops**
+
+    * For, Foreach but not while.
+    Loops are inherently imperative. They also mix concerns: iteration and execution are two different concerns that, if handled separately from each other, result in more flexible code.
+
+    Better options include:
+
+    recursion
+
+    map
+
+    filter
+
+    reduce
+
+    * While is considered redundant.
+    * Recursion, use Tail Call
     
+    Tail call recursion is safer and allows for optimization.
+
+    To make a tail call recursion you need to place the function call at the end of your function and have it return the value. see es6-recursion-tail-recursion
+
+    ```javascript
+    // recur :: Number -> Number -> Number
+    const recur = n => acc =>  n == 0 ? acc : recur(n-1)(n * acc)
+    
+    // recur :: Number -> Number
+    const factorial = (n) => recur(n)(1)
+    ```
+
+* **<a name="javascript-partial-evaluation"></a>1.21 Partial Evaluation**
+   * Partially applied functions can prove useful for functions that are re-used, but are not a requirement, more details can be found here.
+
 ## <a name="scss-style-guide"></a>SCSS style guide
 
 * **<a name="scss-linting"></a>2.1 Linting**

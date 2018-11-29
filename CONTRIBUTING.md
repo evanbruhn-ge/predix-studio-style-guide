@@ -27,9 +27,8 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 	16. [Comments](#javascript-comments)
 	17. [Comparison Operators & Equality](#javascript-operators)
 	18. [jQuery](#javascript-jquery)
-	19. [Classes & Constructors](#javascript-classes) (ES6 extensions only)
-	20. [Loops](#javascript-loops)
-	21. [Partial Evaluation](#javascript-partial-evaluation)
+	19. [Loops](#javascript-loops)
+	20. [Partial Evaluation](#javascript-partial-evaluation)
 2. [SCSS Style Guide](#scss-style-guide)
 	1. [Linting](#scss-linting)
 	2. [Glossary](#scss-glossary)
@@ -254,6 +253,24 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
         const foo = () => ...
         function getBigSalad(){
         return salads.filter(salad => salad.size === 'big')[0]
+    }
+    
+    function changeButtonState(button) {
+        return DMWComponent.writeButtonState(button.id, button.state);
+    }
+
+    function getAnimalButtons() {
+        return DMWComponent.animalButtons;
+    }
+
+    function alwaysBigWoof(woofSounds) {
+        return woofSounds.find(sound => {
+          sound.type === 'bigwoof';
+        });
+    }
+
+    async function animalNoises() {
+         await alwaysBigWoof();
     }
     ```
 
@@ -645,143 +662,8 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
 
   * jQuery is not available for use in the v11 API and must not be added without discussion with the UX team.
   * jQuery is still available for use in the v10 API, refer to (some link to an old revision of the guide) for guidelines on its use"
-  
-* **<a name="javascript-classes"></a>1.19 Classes and Constructors**
 
-    ```javascript
-    // bad
-    function Queue(contents = []) {
-      this.queue = [...contents];
-    }
-    Queue.prototype.pop = function () {
-      const value = this.queue[0];
-      this.queue.splice(0, 1);
-      return value;
-    };
-
-    // good
-    class Queue {
-      constructor(contents = []) {
-        this.queue = [...contents];
-      }
-      pop() {
-        const value = this.queue[0];
-        this.queue.splice(0, 1);
-        return value;
-      }
-    }
-    ```
-
-  * Use `extends` for inheritance.
-
-    > Why? It is a built-in way to inherit prototype functionality without breaking `instanceof`.
-
-    ```javascript
-    // bad
-    const inherits = require('inherits');
-    function PeekableQueue(contents) {
-      Queue.apply(this, contents);
-    }
-    inherits(PeekableQueue, Queue);
-    PeekableQueue.prototype.peek = function () {
-      return this.queue[0];
-    };
-
-    // good
-    class PeekableQueue extends Queue {
-      peek() {
-        return this.queue[0];
-      }
-    }
-    ```
-
-  * Methods can return `this` to help with method chaining.
-
-    ```javascript
-    // bad
-    Jedi.prototype.jump = function () {
-      this.jumping = true;
-      return true;
-    };
-
-    Jedi.prototype.setHeight = function (height) {
-      this.height = height;
-    };
-
-    const luke = new Jedi();
-    luke.jump(); // => true
-    luke.setHeight(20); // => undefined
-
-    // good
-    class Jedi {
-      jump() {
-        this.jumping = true;
-        return this;
-      }
-
-      setHeight(height) {
-        this.height = height;
-          return this;
-      }
-    }
-
-    const luke = new Jedi();
-
-    luke.jump()
-      .setHeight(20);
-    ```
-
-  * Classes have a default constructor if one is not specified. An empty constructor function or one that just delegates to a parent class is unnecessary. eslint: [`no-useless-constructor`](https://eslint.org/docs/rules/no-useless-constructor)
-
-    ```javascript
-    // bad
-    class Jedi {
-      constructor() {}
-
-      getName() {
-        return this.name;
-      }
-    }
-
-    // bad
-    class Rey extends Jedi {
-      constructor(...args) {
-        super(...args);
-      }
-    }
-
-    // good
-    class Rey extends Jedi {
-      constructor(...args) {
-        super(...args);
-        this.name = 'Rey';
-      }
-    }
-    ```
-
-  * Avoid duplicate class members. eslint: [`no-dupe-class-members`](https://eslint.org/docs/rules/no-dupe-class-members)
-
-    > Why? Duplicate class member declarations will silently prefer the last one - having duplicates is almost certainly a bug.
-
-    ```javascript
-    // bad
-    class Foo {
-      bar() { return 1; }
-      bar() { return 2; }
-     }
-
-    // good
-    class Foo {
-      bar() { return 1; }
-    }
-
-    // good
-    class Foo {
-      bar() { return 2; }
-    }
-    ```
-
-* **<a name="javascript-loops"></a>1.20 Loops**
+* **<a name="javascript-loops"></a>1.19 Loops**
 
     * For, Foreach but not while.
     Loops are inherently imperative. They also mix concerns: iteration and execution are two different concerns that, if handled separately from each other, result in more flexible code.
@@ -811,7 +693,7 @@ Targeting **Predix Studio** and **Predix App Engine** development. This referenc
     const factorial = (n) => recur(n)(1)
     ```
 
-* **<a name="javascript-partial-evaluation"></a>1.21 Partial Evaluation**
+* **<a name="javascript-partial-evaluation"></a>1.20 Partial Evaluation**
    * Partially applied functions can prove useful for functions that are re-used, but are not a requirement, more details can be found here.
 
 ## <a name="scss-style-guide"></a>SCSS style guide

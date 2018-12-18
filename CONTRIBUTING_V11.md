@@ -1,6 +1,6 @@
 ![Predix Studio logo](https://www.predix.io/assets/images/landing/studio_logo_2x.png)
 
-# Style Guide
+# Style Guide (WORK IN PROGRESS)
 ###### For JavaScript and SCSS
 
 Targeting **Predix Studio** and **Predix App Engine** development. This references a subset of AirBnB's ES5 and ES6 style guides, tailored to suit Studio and App Engine's front-end stack and development patterns. SCSS style guide references a subset of AirBnB's and codeguide.co's SCSS and CSS style guides in addition to our guidelines.
